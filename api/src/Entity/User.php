@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+#[ApiResource]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -27,6 +31,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToMany(mappedBy: 'member', targetEntity: ClubMember::class, orphanRemoval: true)]
+    private Collection $memberships;
+
+    public function __construct()
+    {
+        $this->memberships = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -96,5 +108,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, ClubMember>
+     */
+    public function getMemberships(): Collection
+    {
+        return $this->memberships;
+    }
+
+    public function addMembership(ClubMember $membership): static
+    {
+        if (!$this->memberships->contains($membership)) {
+            $this->memberships->add($membership);
+            $membership->setMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMembership(ClubMember $membership): static
+    {
+        if ($this->memberships->removeElement($membership)) {
+            // set the owning side to null (unless already changed)
+            if ($membership->getMember() === $this) {
+                $membership->setMember(null);
+            }
+        }
+
+        return $this;
     }
 }

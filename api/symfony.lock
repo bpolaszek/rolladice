@@ -181,7 +181,7 @@
         "version": "1.6.0"
     },
     "phpunit/phpunit": {
-        "version": "9.6",
+        "version": "10.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
