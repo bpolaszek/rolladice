@@ -1,4 +1,6 @@
 {
+    "name": "rolladice/api",
+    "description": "RollADice - Game Club management API",
     "type": "project",
     "license": "MIT",
     "require": {
@@ -30,6 +32,8 @@
     },
     "require-dev": {
         "api-platform/schema-generator": "^5.0",
+        "friendsofphp/php-cs-fixer": "^3.23",
+        "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9",
         "symfony/browser-kit": "6.3.*",
         "symfony/css-selector": "6.3.*",
@@ -84,8 +88,18 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "db:validate-schema": "bin/console doctrine:schema:validate",
+        "code:format": "vendor/bin/php-cs-fixer fix",
+        "code:analyze-types": "vendor/bin/phpstan analyse",
         "tests:run": "bin/phpunit",
-        "tests:run:with-coverage": "bin/phpunit --coverage-text"
+        "tests:run:with-coverage": "bin/phpunit --coverage-text",
+        "ci:check": [
+            "@composer validate",
+            "@db:validate-schema",
+            "@code:format",
+            "@code:analyze-types",
+            "@tests:run:with-coverage"
+        ]
     },
     "conflict": {
         "symfony/symfony": "*"
