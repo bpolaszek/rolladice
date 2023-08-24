@@ -13,57 +13,16 @@ class ClubMember
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    public ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'members')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Club $club = null;
+    public ?Club $club = null;
 
-    #[ORM\ManyToOne(inversedBy: 'memberships')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $member = null;
+    public ?User $member = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $role = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getClub(): ?Club
-    {
-        return $this->club;
-    }
-
-    public function setClub(?Club $club): static
-    {
-        $this->club = $club;
-
-        return $this;
-    }
-
-    public function getMember(): ?User
-    {
-        return $this->member;
-    }
-
-    public function setMember(?User $member): static
-    {
-        $this->member = $member;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): static
-    {
-        $this->role = $role;
-
-        return $this;
-    }
+    public ?string $role = null;
 }

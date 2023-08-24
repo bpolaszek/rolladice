@@ -13,71 +13,21 @@ class Game
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    public ?int $id = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?GameSession $session = null;
+    public ?GameSession $session = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $startedAt = null;
+    public ?\DateTimeImmutable $startedAt = null;
 
+    /**
+     * @var array<string, mixed>
+     */
     #[ORM\Column(nullable: true)]
-    private ?array $state = null;
+    public ?array $state = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getSession(): ?GameSession
-    {
-        return $this->session;
-    }
-
-    public function setSession(?GameSession $session): static
-    {
-        $this->session = $session;
-
-        return $this;
-    }
-
-    public function getStartedAt(): ?\DateTimeImmutable
-    {
-        return $this->startedAt;
-    }
-
-    public function setStartedAt(\DateTimeImmutable $startedAt): static
-    {
-        $this->startedAt = $startedAt;
-
-        return $this;
-    }
-
-    public function getState(): ?array
-    {
-        return $this->state;
-    }
-
-    public function setState(?array $state): static
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
+    public ?string $status = null;
 }
