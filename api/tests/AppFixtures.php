@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\Tests;
 
 use App\Tests\Story\ClubMemberStory;
 use App\Tests\Story\ClubStory;
