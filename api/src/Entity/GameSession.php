@@ -27,5 +27,5 @@ class GameSession
     public ?int $iteration = null;
 
     #[ORM\Column(length: 255)]
-    public ?string $status = null;
+    public ?GameSessionStatus $status = null;
 }

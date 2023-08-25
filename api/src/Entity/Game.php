@@ -29,5 +29,5 @@ class Game
     public ?array $state = null;
 
     #[ORM\Column(length: 255)]
-    public ?string $status = null;
+    public ?GameStatus $status = null;
 }

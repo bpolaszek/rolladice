@@ -23,6 +23,6 @@ class ClubMember
     #[ORM\JoinColumn(nullable: false)]
     public ?User $member = null;
 
-    #[ORM\Column(length: 255)]
-    public ?string $role = null;
+    #[ORM\Column]
+    public ?ClubMemberRole $role = null;
 }
