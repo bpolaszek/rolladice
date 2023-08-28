@@ -5,5 +5,13 @@ when@dev: &dev
         auto_refresh_proxies: true
         faker:
             seed: 123456
+            
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+        
+        App\Tests\Factory\:
+            resource: '../../tests/Factory/'
 
 when@test: *dev
