@@ -94,7 +94,7 @@
         "db:validate-schema": "bin/console doctrine:schema:validate",
         "code:format": "vendor/bin/php-cs-fixer fix",
         "code:analyze-types": "vendor/bin/phpstan analyse",
-        "tests:run": "bin/phpunit",
+        "tests:run": "bin/phpunit --testdox",
         "tests:run:with-coverage": "bin/phpunit --coverage-text",
         "ci:check": [
             "@composer validate",
