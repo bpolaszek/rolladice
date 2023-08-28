@@ -9,6 +9,8 @@ final class UsersStory extends Story
 {
     public function build(): void
     {
-        UserFactory::createMany(10);
+        UserFactory::createOne(['email' => 'bob@example.com']);
+        UserFactory::createOne(['email' => 'alice@example.com']);
+        UserFactory::createMany(8);
     }
 }

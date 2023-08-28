@@ -9,7 +9,8 @@ final class ClubStory extends Story
 {
     public function build(): void
     {
-        $clubs = ClubFactory::createMany(3);
-        $clubs[0]->name = 'The Morbaks';
+        ClubFactory::createOne(['name' => 'Triangles']);
+        ClubFactory::createOne(['name' => 'Chessy']);
+        ClubFactory::createMany(3);
     }
 }

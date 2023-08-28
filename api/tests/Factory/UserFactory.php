@@ -9,8 +9,6 @@ use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
 
-use function Symfony\Component\String\u;
-
 /**
  * @extends ModelFactory<User>
  *
@@ -55,8 +53,7 @@ final class UserFactory extends ModelFactory
      */
     public function __construct(
         private UserPasswordHasherInterface $passwordHasher
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -78,7 +75,7 @@ final class UserFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-             ->afterInstantiate(function(User $user): void {
+             ->afterInstantiate(function (User $user): void {
                  $plainPassword = $_SERVER['DEFAULT_USER_PASSWORD'] ?? throw new \RuntimeException('Env var `DEFAULT_USER_PASSWORD` has not been defined.');
                  $user->password = $this->passwordHasher->hashPassword($user, $plainPassword);
              })

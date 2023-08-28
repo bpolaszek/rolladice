@@ -8,5 +8,5 @@ enum ClubMemberRole: string
 {
     case OWNER = 'owner';
     case ADMIN = 'admin';
-    case USER = 'user';
+    case PLAYER = 'player';
 }
