@@ -35,9 +35,19 @@ class ClubMemberVoter extends Voter
         }
 
         return match ($attribute) {
+            ClubMember::VIEW => $this->userCanSeeMember($user, $clubMember),
             ClubMember::CREATE => $this->userCanAddMember($user, $clubMember),
             default => false,
         };
+    }
+
+    private function userCanSeeMember(User $me, ClubMember $otherMember): bool
+    {
+        /** @var Club $club */
+        $club = $otherMember->club;
+        $myRole = $this->repository->findRole($club, $me);
+
+        return null !== $myRole;
     }
 
     private function userCanAddMember(User $me, ClubMember $membershipToBeAdded): bool

@@ -13,12 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     operations: [
         new GetCollection(),
-        new Get(),
+        new Get(security: 'is_granted("'.self::VIEW.'", object)'),
         new Post(securityPostDenormalize: 'is_granted("'.self::CREATE.'", object)'),
     ]
 )]
 class ClubMember
 {
+    public const VIEW = 'club-member:view';
     public const CREATE = 'club-member:create';
 
     #[ORM\Id]
