@@ -3,13 +3,24 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\ClubMemberRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClubMemberRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(securityPostDenormalize: 'is_granted("'.self::CREATE.'", object)')
+    ]
+)]
 class ClubMember
 {
+    public const CREATE = 'club-member:create';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

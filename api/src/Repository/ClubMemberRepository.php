@@ -2,12 +2,14 @@
 
 namespace App\Repository;
 
+use App\Entity\Club;
 use App\Entity\ClubMember;
+use App\Entity\ClubMemberRole;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @codeCoverageIgnore
  *
  * @extends ServiceEntityRepository<ClubMember>
  *
@@ -23,28 +25,8 @@ class ClubMemberRepository extends ServiceEntityRepository
         parent::__construct($registry, ClubMember::class);
     }
 
-    //    /**
-    //     * @return ClubMember[] Returns an array of ClubMember objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?ClubMember
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findRole(Club $club, User $user): ?ClubMemberRole
+    {
+        return $this->findOneBy(['club' => $club, 'member' => $user])?->role;
+    }
 }
