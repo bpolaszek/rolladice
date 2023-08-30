@@ -10,8 +10,9 @@ use App\Repository\ClubMemberRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-use function str_starts_with;
-
+/**
+ * @extends Voter<string, ClubMember>
+ */
 class ClubMemberVoter extends Voter
 {
     public function __construct(
@@ -22,7 +23,7 @@ class ClubMemberVoter extends Voter
     protected function supports(string $attribute, mixed $subject): bool
     {
         return $subject instanceof ClubMember
-            && str_starts_with($attribute, 'club-member:');
+            && \str_starts_with($attribute, 'club-member:');
     }
 
     protected function voteOnAttribute(string $attribute, mixed $clubMember, TokenInterface $token): bool
@@ -39,18 +40,18 @@ class ClubMemberVoter extends Voter
         };
     }
 
-    private function userCanAddMember(User $me, ClubMember $member): bool
+    private function userCanAddMember(User $me, ClubMember $membershipToBeAdded): bool
     {
         /** @var Club $club */
-        $club = $member->club;
-
-        $role = $this->repository->findRole($club, $me);
+        $club = $membershipToBeAdded->club;
+        $myRole = $this->repository->findRole($club, $me);
 
         // Not even member 🚷
-        if (null === $role) {
+        if (null === $myRole) {
             return false;
         }
 
-        return $role->isAtLeast(ClubMemberRole::ADMIN);
+        return $myRole->isAtLeast(ClubMemberRole::ADMIN)
+            && $membershipToBeAdded->role->isAtMost($myRole);
     }
 }

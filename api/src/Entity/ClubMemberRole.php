@@ -23,4 +23,9 @@ enum ClubMemberRole: string
     {
         return $this->getRank() >= $role->getRank();
     }
+
+    public function isAtMost(self $role): bool
+    {
+        return $this->getRank() <= $role->getRank();
+    }
 }

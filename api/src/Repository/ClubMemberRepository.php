@@ -10,7 +10,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- *
  * @extends ServiceEntityRepository<ClubMember>
  *
  * @method ClubMember|null find($id, $lockMode = null, $lockVersion = null)

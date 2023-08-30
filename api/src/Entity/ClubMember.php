@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
     operations: [
         new GetCollection(),
         new Get(),
-        new Post(securityPostDenormalize: 'is_granted("'.self::CREATE.'", object)')
+        new Post(securityPostDenormalize: 'is_granted("'.self::CREATE.'", object)'),
     ]
 )]
 class ClubMember
