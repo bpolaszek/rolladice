@@ -55,4 +55,46 @@ class ClubMemberViewTest extends ApiTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
+
+    public function testARandomUserCannotListOtherMembersOfAClubTheyDoNotBelongTo(): void
+    {
+        /** @var ClubMemberRepository $repository */
+        $repository = static::getContainer()->get(ClubMemberRepository::class);
+
+        $user = ClubMemberFactory::createOne([
+            'club' => Chessy(),
+            'member' => UserFactory::createOne(),
+            'role' => ClubMemberRole::PLAYER,
+        ])->object()->member;
+
+        $bobsTrianglesMembership = $repository->findOneBy(['club' => Triangles(), 'member' => Bob()]);
+
+        $api = $this->as($user);
+        $response = $api->request('GET', '/club_members');
+        $json = $response->toArray();
+        $ids = \array_column($json['hydra:member'], 'id');
+
+        $this->assertNotContains($bobsTrianglesMembership->id, $ids);
+    }
+
+    public function testARandomUserCanListOtherMembersOfAClubTheyBelongTo(): void
+    {
+        /** @var ClubMemberRepository $repository */
+        $repository = static::getContainer()->get(ClubMemberRepository::class);
+
+        $user = ClubMemberFactory::createOne([
+            'club' => Triangles(),
+            'member' => UserFactory::createOne(),
+            'role' => ClubMemberRole::PLAYER,
+        ])->object()->member;
+
+        $bobsTrianglesMembership = $repository->findOneBy(['club' => Triangles(), 'member' => Bob()]);
+
+        $api = $this->as($user);
+        $response = $api->request('GET', '/club_members');
+        $json = $response->toArray();
+        $ids = \array_column($json['hydra:member'], 'id');
+
+        $this->assertContains($bobsTrianglesMembership->id, $ids);
+    }
 }
