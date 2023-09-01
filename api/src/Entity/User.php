@@ -8,7 +8,9 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
+use App\State\UserResetPasswordRequestProcessor;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation as Serializer;
@@ -18,6 +20,14 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new GetCollection(normalizationContext: ['groups' => [self::LIST]]),
         new Get(normalizationContext: ['groups' => [self::VIEW]]),
+        new Post(
+            uriTemplate: '/auth/reset-password',
+            normalizationContext: ['groups' => [self::VIEW]],
+            denormalizationContext: ['groups' => [self::RESET_PASSWORD]],
+            validationContext: ['groups' => [self::RESET_PASSWORD]],
+            processor: UserResetPasswordRequestProcessor::class,
+            status: Response::HTTP_NO_CONTENT,
+        ),
         new Post(
             normalizationContext: ['groups' => [self::VIEW]],
             denormalizationContext: ['groups' => [self::CREATE]],
@@ -37,6 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public const LIST = 'user:list';
     public const VIEW = 'user:view';
     public const CREATE = 'user:create';
+    public const RESET_PASSWORD = 'user:reset-password';
     public const UPDATE = 'user:update';
 
     #[ORM\Id]
@@ -46,9 +57,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Serializer\Groups([self::LIST, self::VIEW, self::CREATE, self::UPDATE])]
-    #[Assert\Email(groups: [self::CREATE, self::UPDATE])]
-    #[Assert\NotNull(groups: [self::CREATE])]
+    #[Serializer\Groups([self::LIST, self::VIEW, self::CREATE, self::UPDATE, self::RESET_PASSWORD])]
+    #[Assert\Email(groups: [self::CREATE, self::UPDATE, self::RESET_PASSWORD])]
+    #[Assert\NotNull(groups: [self::CREATE, self::RESET_PASSWORD])]
     public ?string $email = null;
 
     /**
