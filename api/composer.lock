@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da17188e0d723fab37fcde1a616fd0d6",
+    "content-hash": "75b99749111f30fc09c24081714616a4",
     "packages": [
         {
             "name": "api-platform/core",
@@ -6879,6 +6879,146 @@
             "time": "2023-07-19T21:17:31+00:00"
         },
         {
+            "name": "bentools/querystring",
+            "version": "1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bpolaszek/querystring.git",
+                "reference": "9f5685918f8216ff6bdcb90184e107d718ce610b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bpolaszek/querystring/zipball/9f5685918f8216ff6bdcb90184e107d718ce610b",
+                "reference": "9f5685918f8216ff6bdcb90184e107d718ce610b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "league/uri": "^5.0",
+                "phpunit/phpunit": "^7.5|^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.0",
+                "symfony/var-dumper": "@stable"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "BenTools\\QueryString\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Beno!t POLASZEK",
+                    "email": "bpolaszek@gmail.com",
+                    "homepage": "http://www.polaszek.fr",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Query String manipulation library. PHP 7.1+. No dependency, immutable, PSR-7 compliant.",
+            "keywords": [
+                "psr-7",
+                "psr7",
+                "query string",
+                "querystring",
+                "uri",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/bpolaszek/querystring/issues",
+                "source": "https://github.com/bpolaszek/querystring/tree/1.3"
+            },
+            "time": "2022-10-05T08:51:11+00:00"
+        },
+        {
+            "name": "bentools/uri-factory",
+            "version": "2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bpolaszek/uri-factory.git",
+                "reference": "6b8c2584042faa951735bae1a1b8748dc6f681a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bpolaszek/uri-factory/zipball/6b8c2584042faa951735bae1a1b8748dc6f681a6",
+                "reference": "6b8c2584042faa951735bae1a1b8748dc6f681a6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^2.5",
+                "league/uri": "^5.3",
+                "nyholm/psr7": "^1.6",
+                "php-coveralls/php-coveralls": "^2.5",
+                "phpunit/phpunit": "^9.6",
+                "ringcentral/psr7": "^1.3",
+                "squizlabs/php_codesniffer": "@stable",
+                "symfony/var-dumper": "^5.4 || ^6.2"
+            },
+            "suggest": {
+                "guzzlehttp/psr7": "PSR-7 HTTP message library",
+                "league/uri": "URI manipulation Library",
+                "nyholm/psr7": "PSR-7 HTTP message library",
+                "ringcentral/psr7": "PSR-7 HTTP message library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helper/functions.php"
+                ],
+                "psr-4": {
+                    "BenTools\\UriFactory\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Beno!t POLASZEK",
+                    "email": "bpolaszek@gmail.com",
+                    "homepage": "http://www.polaszek.fr",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PSR-7 URI factory",
+            "keywords": [
+                "UriInterface",
+                "factory",
+                "psr-7",
+                "psr7",
+                "uri",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/bpolaszek/uri-factory/issues",
+                "source": "https://github.com/bpolaszek/uri-factory/tree/2.3"
+            },
+            "time": "2023-06-21T14:18:14+00:00"
+        },
+        {
             "name": "cebe/php-openapi",
             "version": "1.7.0",
             "source": {
@@ -8136,6 +8276,84 @@
             "time": "2023-08-13T19:53:39+00:00"
         },
         {
+            "name": "nyholm/psr7",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nyholm/psr7.git",
+                "reference": "3cb4d163b58589e47b35103e8e5e6a6a475b47be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nyholm/psr7/zipball/3cb4d163b58589e47b35103e8e5e6a6a475b47be",
+                "reference": "3cb4d163b58589e47b35103e8e5e6a6a475b47be",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.1 || ^2.0"
+            },
+            "provide": {
+                "php-http/message-factory-implementation": "1.0",
+                "psr/http-factory-implementation": "1.0",
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "http-interop/http-factory-tests": "^0.9",
+                "php-http/message-factory": "^1.0",
+                "php-http/psr7-integration-tests": "^1.0",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.4",
+                "symfony/error-handler": "^4.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nyholm\\Psr7\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                },
+                {
+                    "name": "Martijn van der Ven",
+                    "email": "martijn@vanderven.se"
+                }
+            ],
+            "description": "A fast PHP7 implementation of PSR-7",
+            "homepage": "https://tnyholm.se",
+            "keywords": [
+                "psr-17",
+                "psr-7"
+            ],
+            "support": {
+                "issues": "https://github.com/Nyholm/psr7/issues",
+                "source": "https://github.com/Nyholm/psr7/tree/1.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Zegnat",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-05-02T11:26:24+00:00"
+        },
+        {
             "name": "phar-io/manifest",
             "version": "2.0.3",
             "source": {
@@ -8729,6 +8947,61 @@
                 }
             ],
             "time": "2023-08-19T07:10:56+00:00"
+        },
+        {
+            "name": "psr/http-factory",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-factory.git",
+                "reference": "e616d01114759c4c489f93b099585439f795fe35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
+                "reference": "e616d01114759c4c489f93b099585439f795fe35",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "psr/http-message": "^1.0 || ^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for PSR-7 HTTP message factories",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "psr",
+                "psr-17",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
+            },
+            "time": "2023-04-10T20:10:41+00:00"
         },
         {
             "name": "psr/http-message",
@@ -10633,6 +10906,65 @@
                 }
             ],
             "time": "2021-07-28T10:34:58+00:00"
+        },
+        {
+            "name": "vstelmakh/url-highlight",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vstelmakh/url-highlight.git",
+                "reference": "458f1af6acdf63d33e7fb43aeeecb4bfe64bda2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vstelmakh/url-highlight/zipball/458f1af6acdf63d33e7fb43aeeecb4bfe64bda2b",
+                "reference": "458f1af6acdf63d33e7fb43aeeecb4bfe64bda2b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^7.1 || ^8",
+                "symfony/polyfill-php72": "^1.10"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^0.16 || ^1.2.6",
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^7.5.3 || ^8 || ^9.3",
+                "squizlabs/php_codesniffer": "^3.7.1",
+                "vstelmakh/covelyzer": "^0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VStelmakh\\UrlHighlight\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Volodymyr Stelmakh",
+                    "homepage": "https://github.com/vstelmakh"
+                }
+            ],
+            "description": "Library to parse urls from string input",
+            "homepage": "https://github.com/vstelmakh/url-highlight",
+            "keywords": [
+                "Linkify",
+                "clickable",
+                "extract",
+                "html",
+                "parser",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/vstelmakh/url-highlight/issues",
+                "source": "https://github.com/vstelmakh/url-highlight/tree/v3.0.2"
+            },
+            "time": "2023-01-15T16:58:38+00:00"
         },
         {
             "name": "zenstruck/assert",

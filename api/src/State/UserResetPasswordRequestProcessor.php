@@ -7,11 +7,12 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
 /**
- * @implements ProcessorInterface<void>
+ * @implements ProcessorInterface<User>
  */
 readonly class UserResetPasswordRequestProcessor implements ProcessorInterface
 {
@@ -23,19 +24,19 @@ readonly class UserResetPasswordRequestProcessor implements ProcessorInterface
     }
 
     /**
-     * @param User                 $user
+     * @param User                 $input
      * @param array<string, mixed> $uriVariables
      * @param array<string, mixed> $context
      */
     public function process(
-        mixed $user,
+        mixed $input,
         Operation $operation,
         array $uriVariables = [],
         array $context = [],
-    ): void {
+    ): ?User {
         // Ensure email exists
-        if (!$this->repository->findOneBy(['email' => $user->email])) {
-            return;
+        if (!($user = $this->repository->findOneBy(['email' => $input->email]))) {
+            throw new NotFoundHttpException();
         }
 
         // Sign a JWT that we'll send by mail
@@ -43,6 +44,7 @@ readonly class UserResetPasswordRequestProcessor implements ProcessorInterface
         $link = \sprintf('https://some-ui.com/reset-password?email=%s&token=%s', $user->email, $jwt);
 
         $message = (new Email())
+            ->from('support@example.com')
             ->to($user->email)
             ->subject('Password reinitialization')
             ->text(
@@ -55,5 +57,7 @@ TEXT,
             );
 
         $this->mailer->send($message);
+
+        return $user;
     }
 }

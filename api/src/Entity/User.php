@@ -8,7 +8,9 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
+use App\State\Dto\UserResetPasswordToken;
 use App\State\UserResetPasswordRequestProcessor;
+use App\State\UserResetPasswordVerifyProcessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -22,11 +24,18 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Get(normalizationContext: ['groups' => [self::VIEW]]),
         new Post(
             uriTemplate: '/auth/reset-password',
-            normalizationContext: ['groups' => [self::VIEW]],
             denormalizationContext: ['groups' => [self::RESET_PASSWORD]],
             validationContext: ['groups' => [self::RESET_PASSWORD]],
             processor: UserResetPasswordRequestProcessor::class,
             status: Response::HTTP_NO_CONTENT,
+        ),
+        new Post(
+            uriTemplate: '/auth/reset-password-verify',
+            normalizationContext: ['groups' => [self::VIEW]],
+            denormalizationContext: ['groups' => [self::RESET_PASSWORD]],
+            validationContext: ['groups' => [self::RESET_PASSWORD]],
+            processor: UserResetPasswordVerifyProcessor::class,
+            input: UserResetPasswordToken::class,
         ),
         new Post(
             normalizationContext: ['groups' => [self::VIEW]],
