@@ -65,9 +65,11 @@ final class GameFactory extends ModelFactory
     {
         $session = GameSessionFactory::random();
 
+        $startedAt = $session->day->modify(\sprintf('+%d seconds', \random_int(10, 36000)));
+
         return [
             'session' => $session,
-            'startedAt' => $session->day->modify(\sprintf('+%d seconds', \random_int(10, 36000))),
+            'startedAt' => self::faker()->randomElement([$startedAt, null]),
             'status' => self::faker()->randomElement(GameStatus::cases()),
         ];
     }

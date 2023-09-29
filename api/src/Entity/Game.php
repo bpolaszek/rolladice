@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 #[ApiResource]
+#[ApiFilter(ExistsFilter::class, properties: ['startedAt'])]
 class Game
 {
     #[ORM\Id]
@@ -19,7 +22,7 @@ class Game
     #[ORM\JoinColumn(nullable: false)]
     public ?GameSession $session = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     public ?\DateTimeImmutable $startedAt = null;
 
     /**
